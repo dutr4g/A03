@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras SPA</title>
+</head>
+<body>
+    <div id="listaDeCompras">
+        <h1>Lista de Compras</h1>
+        <ul>
+            <li v-for="item in itens" :key="item.id">{{ item.nome }}</li>
+        </ul>
+        <input v-model="novoItem" @keyup.enter="adicionarItem" placeholder="Adicionar item na lista">
+    </div>
+
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <!-- Script da Aplicação -->
+    <script>
+        new Vue({
+            el: '#listaDeCompras',
+            data: {
+                itens: [
+                    { id: 1, nome: 'Leite' },
+                    { id: 2, nome: 'Pão' },
+                    { id: 3, nome: 'Queijo' },
+                ],
+                novoItem: '',
+            },
+            methods: {
+                adicionarItem: function() {
+                    if (this.novoItem.trim() !== '') {
+                        this.itens.push({
+                            id: this.itens.length + 1,
+                            nome: this.novoItem.trim(),
+                        });
+                        this.novoItem = '';
+                    }
+                },
+            },
+        });
+    </script>
+</body>
+</html>
